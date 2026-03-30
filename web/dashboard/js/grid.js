@@ -1,5 +1,5 @@
 // Animation grid: renders all animation cards
-import { buildPath, buildFullUrl } from './url-builder.js';
+import { buildGridPath, buildFullUrl } from './url-builder.js';
 import { show as showToast } from './toast.js';
 
 export function renderGrid(container, animations, getState) {
@@ -31,6 +31,6 @@ export function renderGrid(container, animations, getState) {
 
 export function updateGrid(getState) {
   document.querySelectorAll('.lazy-svg').forEach(img => {
-    img.src = buildPath(img.dataset.anim, getState());
+    img.src = buildGridPath(img.dataset.anim, getState());
   });
 }

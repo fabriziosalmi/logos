@@ -18,6 +18,22 @@ export function buildPath(anim, state) {
   return base;
 }
 
+// Grid thumbnail: always favicon/pure for crisp previews at small sizes
+export function buildGridPath(anim, state) {
+  const { color1, color2, shape, texture } = state;
+  const c1 = color1 || 'white';
+  let base = `/api/v4/render/favicon/pure/${c1}${color2 ? '/' + color2 : ''}/${anim}.svg`;
+
+  const params = [];
+  const theme = getCurrentTheme();
+  if (theme !== 'auto') params.push(`theme=${theme}`);
+  if (shape) params.push(`shape=${shape}`);
+  if (texture) params.push(`texture=${texture}`);
+
+  if (params.length > 0) base += '?' + params.join('&');
+  return base;
+}
+
 export function buildFullUrl(anim, state) {
   return `${window.location.origin}${buildPath(anim, state)}`;
 }
