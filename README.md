@@ -4,6 +4,8 @@ High-performance dynamic SVG asset generation service built in Go. Generate cust
 
 **Zero runtime dependencies** - single static binary with embedded dashboard.
 
+![Logos API Dashboard](screenshot.png)
+
 ## Quick Start
 
 ```bash
