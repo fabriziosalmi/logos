@@ -26,6 +26,7 @@ const formatSelect = document.getElementById('format-select');
 const sceneSelect = document.getElementById('scene-select');
 const shapeSelect = document.getElementById('shape-select');
 const textureSelect = document.getElementById('texture-select');
+const variantSelect = document.getElementById('variant-select');
 const titleInput = document.getElementById('title-input');
 const subtitleInput = document.getElementById('subtitle-input');
 const gridContainer = document.getElementById('grid-container');
@@ -38,6 +39,7 @@ function getState() {
     scene: sceneSelect.value,
     shape: shapeSelect ? shapeSelect.value : '',
     texture: textureSelect ? textureSelect.value : '',
+    variant: variantSelect ? variantSelect.value : '',
     title: titleInput.value,
     subtitle: subtitleInput.value,
   };
@@ -65,7 +67,7 @@ renderGrid(gridContainer, ANIMATIONS, getState);
 initPreviewCopy();
 
 // Input listeners with debounce
-const inputs = [inputC1, inputC2, formatSelect, sceneSelect, shapeSelect, textureSelect, titleInput, subtitleInput];
+const inputs = [inputC1, inputC2, formatSelect, sceneSelect, shapeSelect, textureSelect, variantSelect, titleInput, subtitleInput];
 inputs.forEach(el => {
   if (!el) return;
   let timer;

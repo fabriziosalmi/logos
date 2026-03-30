@@ -112,6 +112,24 @@
 
           <div class="flex flex-col sm:flex-row gap-3">
             <div class="flex-1">
+              <span class="label-text">Variant</span>
+              <select id="variant-select" class="ctrl-select" title="Visual variant">
+                <option value="">Default</option>
+                <option value="outline">Outline (Strokes only)</option>
+                <option value="solid">Solid (Filled, no strokes)</option>
+                <option value="duotone">Duotone (Layered opacity)</option>
+                <option value="ghost">Ghost (Faded/disabled)</option>
+                <option value="ring">Ring (Outer only)</option>
+                <option value="minimal">Minimal (Core only)</option>
+                <option value="inverted">Inverted (Swap colors)</option>
+                <option value="badge">Badge (iOS-style icon)</option>
+                <option value="glow">Glow (Neon drop-shadow)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="flex flex-col sm:flex-row gap-3">
+            <div class="flex-1">
               <span class="label-text">Title</span>
               <input type="text" id="title-input" value="Logos API" class="ctrl-input" placeholder="e.g. My App">
             </div>

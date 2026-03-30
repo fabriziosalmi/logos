@@ -85,11 +85,50 @@ func Render(opts RenderOptions) RenderResult {
 		orbitStrokeWidth = fmt.Sprintf("%.1f", opts.StrokeWidth)
 	}
 
-	if opts.Variant == "outline" {
+	// Variant overrides (applied before rendering)
+	variantCss := ""
+	switch opts.Variant {
+	case "outline":
+		// Strokes only, no fills
 		theme.CoreBg = "transparent"
 		if outerStrokeWidth == "0" {
 			outerStrokeWidth = "1.5"
 		}
+	case "solid":
+		// Filled background = primary color, white internals, no strokes
+		theme.CoreBg = fillDef
+		theme.DotColor = "#ffffff"
+		outerStrokeWidth = "0"
+		orbitStrokeWidth = "0"
+		variantCss = "\n    .orbit{display:none}"
+	case "duotone":
+		// Outer filled at low opacity, core full
+		variantCss = "\n    .outer{fill-opacity:0.15;stroke-opacity:0.4}.orbit{stroke-opacity:0.3}"
+	case "ghost":
+		// Everything faded — for inactive/disabled states
+		variantCss = "\n    .logos-api-core{opacity:0.25}"
+	case "ring":
+		// Only the outer ring visible
+		variantCss = "\n    .orbit,.core{display:none}"
+	case "minimal":
+		// Only the core dot, no outer/orbit
+		variantCss = "\n    .outer,.orbit{display:none}"
+	case "inverted":
+		// Colored bg, white strokes and shapes
+		theme.CoreBg = fillDef
+		fillDef = "#ffffff"
+		strokeDef = "#ffffff"
+		theme.DotColor = fillDef
+	case "badge":
+		// Filled circle bg + white icon (iOS-style)
+		theme.CoreBg = fillDef
+		theme.DotColor = theme.CoreBg
+		fillDef = "#ffffff"
+		strokeDef = "#ffffff"
+		outerStrokeWidth = "0"
+	case "glow":
+		// Normal + outer glow effect via box-shadow-like filter
+		variantCss = fmt.Sprintf("\n    .outer{filter:drop-shadow(0 0 4px #%s) drop-shadow(0 0 12px #%s)}", primaryHex, primaryHex)
 	}
 
 	alpha := opts.Alpha
@@ -174,6 +213,10 @@ func Render(opts RenderOptions) RenderResult {
 
 	if opts.Hover {
 		buf.WriteString("\n    .logos-api-core:hover{filter:brightness(1.2);transition:filter .2s ease}")
+	}
+
+	if variantCss != "" {
+		buf.WriteString(variantCss)
 	}
 
 	buf.WriteString("\n  </style>")

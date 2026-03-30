@@ -2,7 +2,7 @@
 import { getCurrentTheme } from './theme.js';
 
 export function buildPath(anim, state) {
-  const { color1, color2, format, scene, title, subtitle, shape, texture } = state;
+  const { color1, color2, format, scene, title, subtitle, shape, texture, variant } = state;
   const c1 = color1 || 'white';
   let base = `/api/v4/render/${format}/${scene}/${c1}${color2 ? '/' + color2 : ''}/${anim}.svg`;
 
@@ -13,6 +13,7 @@ export function buildPath(anim, state) {
   if (subtitle) params.push(`subtitle=${encodeURIComponent(subtitle)}`);
   if (shape) params.push(`shape=${shape}`);
   if (texture) params.push(`texture=${texture}`);
+  if (variant) params.push(`variant=${variant}`);
 
   if (params.length > 0) base += '?' + params.join('&');
   return base;
@@ -20,7 +21,7 @@ export function buildPath(anim, state) {
 
 // Grid thumbnail: always favicon/pure for crisp previews at small sizes
 export function buildGridPath(anim, state) {
-  const { color1, color2, shape, texture } = state;
+  const { color1, color2, shape, texture, variant } = state;
   const c1 = color1 || 'white';
   let base = `/api/v4/render/favicon/pure/${c1}${color2 ? '/' + color2 : ''}/${anim}.svg`;
 
@@ -29,6 +30,7 @@ export function buildGridPath(anim, state) {
   if (theme !== 'auto') params.push(`theme=${theme}`);
   if (shape) params.push(`shape=${shape}`);
   if (texture) params.push(`texture=${texture}`);
+  if (variant) params.push(`variant=${variant}`);
 
   if (params.length > 0) base += '?' + params.join('&');
   return base;
