@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go-version: ['1.22', '1.23']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}
+      - name: Build
+        run: go build -o logos ./cmd/logos
+      - name: Vet
+        run: go vet ./...
+      - name: Smoke test
+        run: |
+          ./logos &
+          sleep 2
+          # Core endpoints
+          curl -f http://localhost:3000/healthz
+          curl -f http://localhost:3000/ > /dev/null
+          # V4 API
+          curl -f http://localhost:3000/api/v4/render/favicon/pure/blue/spin.svg > /dev/null
+          curl -f http://localhost:3000/api/v4/render/og-card/spotlight/amber/cyan/pulse.svg > /dev/null
+          # Shapes, textures, variants
+          curl -f 'http://localhost:3000/api/v4/render/favicon/pure/rose/static.svg?shape=shield' > /dev/null
+          curl -f 'http://localhost:3000/api/v4/render/favicon/pure/neon/spin.svg?texture=glitch&variant=badge' > /dev/null
+          # Speed, direction, Tailwind colors, new formats/scenes/themes
+          curl -f 'http://localhost:3000/api/v4/render/twitter-card/hexgrid/slate-500/breathe.svg?speed=2&theme=dracula' > /dev/null
+          # V3 legacy
+          curl -f http://localhost:3000/api/favicon/green/pulse.svg > /dev/null
+          # App shortcuts + fallback
+          curl -f http://localhost:3000/app/logos/favicon.svg > /dev/null
+          curl -f http://localhost:3000/app/unknown/favicon.svg > /dev/null
+          # Cache
+          curl -f http://localhost:3000/cache/stats > /dev/null
+          echo "All endpoints OK"
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Docker image
+        run: docker build -t logos:ci .

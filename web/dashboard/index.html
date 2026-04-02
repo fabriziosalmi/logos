@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logos API | Next-Gen Assets</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="page theme-dark">
+
+  <nav class="glass-panel navbar">
+    <div class="container navbar-inner">
+      <div class="navbar-brand">
+        <svg width="24" height="24" viewBox="0 0 32 32" class="brand-mark" aria-hidden="true">
+          <circle cx="16" cy="16" r="14" fill="transparent" stroke="#888" stroke-width="1.5"/>
+          <ellipse cx="16" cy="16" rx="10" ry="7" fill="none" stroke="#888" stroke-width="1.5"/>
+          <circle cx="16" cy="16" r="3.5" fill="#888"/>
+        </svg>
+        <span class="page-title">Logos API</span>
+        <span class="version-badge">v1.0</span>
+      </div>
+      <div class="nav-links nav-text">
+        <a href="#api-reference" class="nav-link">Documentation</a>
+        <a href="#library" class="nav-link">Library</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main container">
+    <div class="hero">
+
+      <div class="hero-left">
+        <h1 class="hero-title gradient-text">
+          Perfect Assets.<br/>Any Context.
+        </h1>
+        <p class="hero-copy muted-text">
+          Dynamic SVG API for favicons, avatars, OG cards, and heroes. Colors, gradients, icon packs, variants, textures, and animations—without redesign work.
+        </p>
+
+        <div id="api-reference" class="glass-panel api-card accent-border">
+          <div class="preview-box" id="live-preview-box"></div>
+          <div class="endpoint">
+            <div class="endpoint-head">
+              <span class="endpoint-label">LIVE ENDPOINT</span>
+              <span class="endpoint-badge">GET</span>
+            </div>
+            <code class="url-box" id="doc-url">...</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="glass-panel control-panel">
+
+          <div class="row row-2">
+            <div class="field">
+              <label class="label-text" for="format-select">Format</label>
+              <select id="format-select" class="ctrl-select" title="Output format">
+                <option value="favicon">Favicon (32x32)</option>
+                <option value="avatar">Avatar (512x512)</option>
+                <option value="og-card" selected>OG Card (1200x630)</option>
+                <option value="hero">Hero (1920x1080)</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="label-text" for="scene-select">Scene</label>
+              <select id="scene-select" class="ctrl-select" title="Scene composition">
+                <option value="pure">Pure (Logo Only)</option>
+                <option value="spotlight" selected>Spotlight (Glow)</option>
+                <option value="grid">Grid (Cyberpunk)</option>
+                <option value="split">Split (Logo + Text)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row row-2">
+            <div class="field">
+              <label class="label-text" for="shape-select">Shape</label>
+              <select id="shape-select" class="ctrl-select" title="Icon shape">
+                <option value="">Default (circle)</option>
+                <option value="atom">Atom</option>
+                <option value="shield">Shield</option>
+                <option value="hexagon">Hexagon</option>
+                <option value="diamond">Diamond</option>
+                <option value="bolt">Bolt</option>
+                <option value="cube">Cube</option>
+                <option value="wave">Wave</option>
+                <option value="gear">Gear</option>
+                <option value="eye">Eye</option>
+                <option value="leaf">Leaf</option>
+                <option value="star">Star</option>
+                <option value="circle">Circle</option>
+                <option value="triangle">Triangle</option>
+                <option value="square">Square</option>
+                <option value="pentagon">Pentagon</option>
+                <option value="octagon">Octagon</option>
+                <option value="cross">Cross</option>
+                <option value="heart">Heart</option>
+                <option value="cloud">Cloud</option>
+                <option value="flame">Flame</option>
+                <option value="droplet">Droplet</option>
+                <option value="moon">Moon</option>
+                <option value="sun">Sun</option>
+                <option value="arrow">Arrow</option>
+                <option value="lock">Lock</option>
+                <option value="infinity">Infinity</option>
+                <option value="crown">Crown</option>
+                <option value="pill">Pill</option>
+                <option value="target">Target</option>
+              </select>
+            </div>
+            <div class="field">
+              <label class="label-text" for="texture-select">Texture</label>
+              <select id="texture-select" class="ctrl-select" title="SVG texture filter">
+                <option value="">None</option>
+                <option value="grain">Grain (Film Noise)</option>
+                <option value="glass">Glass (Frosted)</option>
+                <option value="noise">Noise (Digital)</option>
+                <option value="glitch">Glitch (Chromatic)</option>
+                <option value="shadow">Shadow (Soft Glow)</option>
+                <option value="neon">Neon (Outer Glow)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label class="label-text" for="variant-select">Variant</label>
+              <select id="variant-select" class="ctrl-select" title="Visual variant">
+                <option value="">Default</option>
+                <option value="outline">Outline (Strokes only)</option>
+                <option value="solid">Solid (Filled, no strokes)</option>
+                <option value="duotone">Duotone (Layered opacity)</option>
+                <option value="ghost">Ghost (Faded/disabled)</option>
+                <option value="ring">Ring (Outer only)</option>
+                <option value="minimal">Minimal (Core only)</option>
+                <option value="inverted">Inverted (Swap colors)</option>
+                <option value="badge">Badge (iOS-style icon)</option>
+                <option value="glow">Glow (Neon drop-shadow)</option>
+                <option value="dotted">Dotted (Blueprint strokes)</option>
+                <option value="sketch">Sketch (Hand-drawn)</option>
+                <option value="neon-outline">Neon Outline (Cyberpunk)</option>
+                <option value="retro">Retro (80s offset shadow)</option>
+                <option value="sticker">Sticker (White cutout)</option>
+                <option value="emboss">Emboss (3D raised)</option>
+                <option value="xray">X-Ray (High contrast)</option>
+                <option value="double">Double (Concentric stroke)</option>
+                <option value="half">Half (Progress/loading)</option>
+                <option value="stamp">Stamp (Bold thick strokes)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row row-2">
+            <div class="field">
+              <label class="label-text" for="title-input">Title</label>
+              <input type="text" id="title-input" value="Logos API" class="ctrl-input" placeholder="e.g. My App">
+            </div>
+            <div class="field">
+              <label class="label-text" for="subtitle-input">Subtitle</label>
+              <input type="text" id="subtitle-input" value="Generative Assets" class="ctrl-input" placeholder="e.g. Open Source">
+            </div>
+          </div>
+
+          <div class="row row-2">
+            <div class="field">
+              <label class="label-text" for="color1">Primary Color</label>
+              <div class="hash-input">
+                <span class="hash-prefix">#</span>
+                <input type="text" id="color1" value="amber" class="ctrl-input" placeholder="hex or name">
+              </div>
+            </div>
+            <div class="field">
+              <div class="field-head">
+                <label class="label-text" for="color2">Gradient Color</label>
+                <span class="optional-hint">optional</span>
+              </div>
+              <div class="hash-input">
+                <span class="hash-prefix">#</span>
+                <input type="text" id="color2" value="" class="ctrl-input" placeholder="leave empty for solid">
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <span class="label-text">Theme</span>
+            <div class="theme-grid">
+              <button type="button" class="theme-btn theme-dark-btn active" data-theme="dark">
+                <span class="dot"></span> Dark
+              </button>
+              <button type="button" class="theme-btn theme-light-btn" data-theme="light">
+                <span class="dot"></span> Light
+              </button>
+              <button type="button" class="theme-btn theme-clear-btn" data-theme="auto">
+                <span class="dot"></span> Clear
+              </button>
+              <button type="button" class="theme-btn theme-solid-btn" data-theme="solid">
+                <span class="dot"></span> Solid
+              </button>
+            </div>
+          </div>
+
+          <div class="palette-section">
+            <span class="label-text palette-label">Palettes</span>
+            <div class="palette-container" id="palette-container"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="library" class="section-header">
+      <h2 class="section-title">Animation Library</h2>
+      <div class="section-line"></div>
+      <span class="section-badge">50 Variants</span>
+    </div>
+    <div class="anim-grid" id="grid-container"></div>
+
+    <!-- Icon Packs Browser -->
+    <div id="icon-packs" class="icon-packs">
+      <div class="section-header">
+        <h2 class="section-title">Icon Packs</h2>
+        <div class="section-line"></div>
+        <span class="section-badge" id="icon-count-badge">Loading...</span>
+      </div>
+
+      <div class="icon-pack-controls">
+        <div class="icon-pack-tabs">
+          <button type="button" class="icon-pack-btn active" data-pack="">All</button>
+          <button type="button" class="icon-pack-btn" data-pack="lucide">Lucide (ISC)</button>
+          <button type="button" class="icon-pack-btn" data-pack="hero">Heroicons (MIT)</button>
+        </div>
+        <div class="icon-pack-search">
+          <input type="text" id="icon-search" class="ctrl-input" placeholder="Search icons... (e.g. rocket, shield, heart)">
+        </div>
+      </div>
+
+      <div class="icon-grid" id="icon-grid"></div>
+      <div class="icon-load-more icon-load-more-hidden" id="icon-load-more">
+        <button type="button" class="ctrl-input load-more-btn" id="icon-load-more-btn">Load more...</button>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast-container">
+    <div id="toast" class="toast">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      <span id="toast-msg">Copied to clipboard</span>
+    </div>
+  </div>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

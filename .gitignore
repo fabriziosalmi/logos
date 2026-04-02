@@ -1,0 +1,27 @@
+node_modules/
+.env
+.env.*
+.env.local
+.DS_Store
+*.log
+
+# Go binary
+/logos
+*.exe
+*.test
+*.out
+coverage.out
+bin/
+dist/
+
+# local docs
+ML.md
+
+# Local configs (do not commit secrets)
+config.yaml
+config.local.yaml
+config.*.local.yaml
+
+# IDE
+.vscode/
+.idea/

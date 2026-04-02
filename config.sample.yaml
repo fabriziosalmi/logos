@@ -1,0 +1,77 @@
+server:
+  host: "0.0.0.0"
+  port: 3000
+  admin_key: ""
+  read_timeout: 5s
+  write_timeout: 10s
+  idle_timeout: 120s
+  shutdown_timeout: 10s
+
+delivery:
+  compression:
+    gzip: true
+  optimization:
+    minify: true
+    precision: 2
+
+cache:
+  strategy: "stale-while-revalidate"
+  max_age: 86400
+  stale_while_revalidate: 604800
+  immutable_static: true
+  etag: true
+
+  l1_memory:
+    max_entries: 10000
+
+  l2_disk:
+    enabled: false
+    path: "/tmp/logos-cache"
+
+  l3_redis:
+    enabled: false
+    addr: "localhost:6379"
+    password: ""
+    db: 0
+    ttl: 86400
+
+  cdn:
+    enabled: true
+    provider: "auto"
+    surrogate_keys: true
+
+cors:
+  allowed_origins:
+    - "*"
+  allow_credentials: false
+
+security:
+  csp: "default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'"
+  hsts: "max-age=63072000; includeSubDomains; preload"
+  rate_limit:
+    enabled: false
+    requests_per_second: 50
+    burst: 100
+
+accessibility:
+  generate_title: true
+  generate_desc: true
+  respect_reduced_motion: true
+  respect_save_data: true
+
+defaults:
+  animation: breathe
+  theme: dark
+  format: favicon
+  scene: pure
+  texture: none
+  shape: circle
+
+apps:
+  example-app:
+    color: purple
+    animation: vortex
+    theme: dark
+    title: Example App
+    subtitle: Generative Assets
+    shape: atom
