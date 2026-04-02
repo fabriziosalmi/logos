@@ -16,7 +16,7 @@ FROM gcr.io/distroless/static-debian12:nonroot
 
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builder /logos /logos
-COPY config.yaml /config.yaml
+COPY config.sample.yaml /config.yaml
 
 ENV CONFIG_PATH=/config.yaml
 

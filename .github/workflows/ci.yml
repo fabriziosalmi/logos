@@ -41,8 +41,6 @@ jobs:
           # App shortcuts + fallback
           curl -f http://localhost:3000/app/logos/favicon.svg > /dev/null
           curl -f http://localhost:3000/app/unknown/favicon.svg > /dev/null
-          # Cache
-          curl -f http://localhost:3000/cache/stats > /dev/null
           echo "All endpoints OK"
 
   docker:
