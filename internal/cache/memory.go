@@ -61,6 +61,11 @@ func (c *MemoryCache) Set(key string, svg []byte, etag string) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 
+	// Normalize nil svg to empty slice to avoid storing nil (which behaves differently in Go maps/slices)
+	if svg == nil {
+		svg = []byte{}
+	}
+
 	// Update existing
 	if el, ok := c.items[key]; ok {
 		c.order.MoveToFront(el)
