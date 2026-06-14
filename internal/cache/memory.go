@@ -52,8 +52,12 @@ func (c *MemoryCache) Get(key string) ([]byte, string, bool) {
 	c.hits++
 	c.mu.Unlock()
 
-	e := el.Value.(*entry)
-	return e.svg, e.etag, true
+	e := el.Value
+	if e == nil {
+		return nil, "", false
+	}
+	entry := e.(*entry)
+	return entry.svg, entry.etag, true
 }
 
 // Set stores in L1, evicting LRU if at capacity.
