@@ -30,7 +30,7 @@ export function renderGrid(container, animations, getState) {
       navigator.clipboard.writeText(url);
       card.style.transform = 'scale(0.92)';
       setTimeout(() => card.style.transform = '', 150);
-      showToast(`Copied ${anim}.svg`);
+      showToast(`Copied ${escapeHtml(anim)}.svg`);
     });
   });
 }
