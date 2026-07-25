@@ -36,21 +36,17 @@ func NewMemoryCache(capacity int) *MemoryCache {
 
 // Get retrieves from L1. Returns svg, etag, hit.
 func (c *MemoryCache) Get(key string) ([]byte, string, bool) {
-	c.mu.RLock()
-	el, ok := c.items[key]
-	c.mu.RUnlock()
+	c.mu.Lock()
+	defer c.mu.Unlock()
 
+	el, ok := c.items[key]
 	if !ok {
-		c.mu.Lock()
 		c.misses++
-		c.mu.Unlock()
 		return nil, "", false
 	}
 
-	c.mu.Lock()
 	c.order.MoveToFront(el)
 	c.hits++
-	c.mu.Unlock()
 
 	e := el.Value
 	if e == nil {
