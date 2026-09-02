@@ -40,7 +40,11 @@ function buildCard(anim) {
 }
 
 export function renderGrid(container, animations, getState) {
-  container.replaceChildren(...animations.map(buildCard));
+  // A fragment rather than a spread: replaceChildren(...list) passes one argument
+  // per card, and this gallery grows with the animation set.
+  const fragment = document.createDocumentFragment();
+  for (const anim of animations) fragment.appendChild(buildCard(anim));
+  container.replaceChildren(fragment);
 
   container.querySelectorAll('.icon-card').forEach(card => {
     card.addEventListener('click', () => {
