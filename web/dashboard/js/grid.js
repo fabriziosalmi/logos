@@ -2,26 +2,45 @@
 import { buildGridPath, buildFullUrl } from './url-builder.js';
 import { show as showToast } from './toast.js';
 
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
+/** One animation card. Built through the DOM, so no value needs escaping. */
+function buildCard(anim) {
+  const card = document.createElement('button');
+  card.type = 'button';
+  card.className = 'icon-card anim-card';
+  card.dataset.anim = anim;
+  card.setAttribute('aria-label', `Copy URL for ${anim}.svg`);
+
+  const overlay = document.createElement('div');
+  overlay.className = 'copy-overlay';
+  const copyBtn = document.createElement('span');
+  copyBtn.className = 'copy-btn';
+  copyBtn.textContent = 'Copy URL';
+  overlay.appendChild(copyBtn);
+
+  const wrapper = document.createElement('div');
+  wrapper.className = 'icon-wrapper anim-card-icon';
+  const img = document.createElement('img');
+  img.src = '';
+  img.alt = anim;
+  img.className = 'lazy-svg anim-card-img';
+  img.dataset.anim = anim;
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  wrapper.appendChild(img);
+
+  const footer = document.createElement('div');
+  footer.className = 'anim-card-footer card-divider';
+  const label = document.createElement('span');
+  label.className = 'anim-label';
+  label.textContent = anim;
+  footer.appendChild(label);
+
+  card.append(overlay, wrapper, footer);
+  return card;
 }
 
 export function renderGrid(container, animations, getState) {
-  container.innerHTML = animations.map(anim => `
-    <button type="button" class="icon-card anim-card" data-anim="${escapeHtml(anim)}" aria-label="Copy URL for ${escapeHtml(anim)}.svg">
-      <div class="copy-overlay">
-        <span class="copy-btn">Copy URL</span>
-      </div>
-      <div class="icon-wrapper anim-card-icon">
-        <img src="" alt="${escapeHtml(anim)}" class="lazy-svg anim-card-img" data-anim="${escapeHtml(anim)}" loading="lazy" decoding="async" />
-      </div>
-      <div class="anim-card-footer card-divider">
-        <span class="anim-label">${escapeHtml(anim)}</span>
-      </div>
-    </button>
-  `).join('');
+  container.replaceChildren(...animations.map(buildCard));
 
   container.querySelectorAll('.icon-card').forEach(card => {
     card.addEventListener('click', () => {
