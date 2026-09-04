@@ -26,6 +26,9 @@ export default defineConfig({
   title: 'Logos API',
   description: 'SVG asset generation API and embedded dashboard',
   base: '/logos/',
+  // The hostname carries the base path on purpose: VitePress joins it with each
+  // page's route, so without it every URL in the sitemap would point at a 404.
+  sitemap: { hostname: 'https://fabriziosalmi.github.io/logos/' },
   themeConfig: {
     footer: {
       message:
