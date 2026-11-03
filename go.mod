@@ -1,9 +1,9 @@
 module github.com/fabriziosalmi/logos
 
-go 1.23
+go 1.24
 
 require (
-	github.com/go-chi/chi/v5 v5.2.1
+	github.com/go-chi/chi/v5 v5.4.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
